@@ -2,20 +2,20 @@
 #include <string.h>
 #include <stdlib.h>
  int j=0;
-// Stack türündeki structýmýz
+// Stack tÃ¼rÃ¼ndeki structimiz
 struct Stack
 {
     int top;
     unsigned capacity;
     int* array;
 };
-//Deðiþken türündeki structýmýz
+//DeÃ°iÃ¾ken tÃ¼rÃ¼ndeki structimiz
 struct Variable{
 	int* deger;
 	char* harf;
 };
  
-// Stack Ýþlemleri
+// Stack Islemleri
 struct Stack* createStack( unsigned capacity )
 {
     struct Stack* stack = (struct Stack*) malloc(sizeof(struct Stack));
@@ -52,13 +52,13 @@ void push(struct Stack* stack, char op)
 }
  
  
-// Karakterin iþlem olup olmadýðný kontrol eden fonksiyon
+// Karakteri islem olup olmadigini kontrol eden fonksiyon
 int isOperand(char ch)
 {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
  
-// Ýþlemlerin öncelik sýrasýný kontrol eden fonsiyon
+// Islemlerin Ã¶ncelik sirasini kontrol eden fonsiyon
 int Prec(char ch)
 {
     switch (ch)
@@ -78,7 +78,7 @@ int Prec(char ch)
 }
 
  
-// Ýnfix ifadeyi postfix ifadeye çeviren fonksiyon 
+// Infix ifadeyi postfix ifadeye Ã§eviren fonksiyon 
 int infixToPostfix(char* exp)
 {
     int i, k;
@@ -89,16 +89,16 @@ int infixToPostfix(char* exp)
  	v.harf[j]=exp[0];
 	
  	j++;
-    // Stack oluþturuyoruz
+    // Stack olusturuyoruz
     struct Stack* stack = createStack(strlen(exp));
     if(!stack) // See if stack was created successfully 
         return -1 ;
         
-//4den baþlýyor çünkü exp[0] atanacak deðiþken oluyor(Eþitliðin sol tarafýnýn adresi
+//4den basliyor Ã§Ã¼nkÃ¼ exp[0] atanacak degisken oluyor(Esitligin sol tarafinin adresi)
     for (i = 4, k = -1; exp[i]; i++)
     {
     	if(exp[i]!=' '){
-        // Okunan karakter iþlemse çýktýya yazýyor
+        // Okunan karakter iÃ¾lemse Ã§iktiya yaziyor
         if (isOperand(exp[i]))
             exp[++k] = exp[i];
          
@@ -106,17 +106,17 @@ int infixToPostfix(char* exp)
         else if (exp[i] == '(')
             push(stack, exp[i]);
          
-        // Okunan karakter ')' ise '(' karakteri görene kadar stacke psuh ediyor
+        // Okunan karakter ')' ise '(' karakteri gÃ¶rene kadar stacke push ediyor
         else if (exp[i] == ')')
         {
             while (!isEmpty(stack) && peek(stack) != '(')
                 exp[++k] = pop(stack);
             if (!isEmpty(stack) && peek(stack) != '(')
-                return -1; // geçersiz girdi            
+                return -1; // geÃ§ersiz girdi            
             else
                 pop(stack);
         }
-        else // Rastlanýlmayan operatör
+        else // Rastlanimayan operatÃ¶r
         {
             while (!isEmpty(stack) && Prec(exp[i]) <= Prec(peek(stack)))
                 exp[++k] = pop(stack);
@@ -126,7 +126,7 @@ int infixToPostfix(char* exp)
 }
     }
  
-    // Bütün operatörleri stack boþalana kadar çekiyoruz
+    // BÃ¼tÃ¼n operatorleri stack bosalana kadar Ã§ekiyoruz
     while (!isEmpty(stack))
         exp[++k] = pop(stack );
  
@@ -134,7 +134,7 @@ int infixToPostfix(char* exp)
     printf( "\n%s", exp );
 }
  
-// Dosyalarý filedan okuduðumuz ve infixtopostfix fonksiyonunu çaðýrdýðýmýz main fonksiyonu
+// Dosyalari filedan okudugumuz ve infixtopostfix fonksiyonunu Ã§agirdigimiz main fonksiyonu
 int main()
 {
 	int i=0,j,row=0,col=0;
@@ -143,7 +143,7 @@ int main()
 	FILE *fp;
 line=(char*)malloc(sizeof char(30));
 fp=fopen("input.txt","r");
-      while ( fgets (line,30, fp ) != NULL ) /* satýr oku */
+      while ( fgets (line,30, fp ) != NULL ) /* satÃ½r oku */
       {
 do{
 			printf("%c",line[i]);
